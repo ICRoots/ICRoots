@@ -39,6 +39,9 @@
     "vitest": "^3.1.2"
   },
   "dependencies": {
-    "@dfinity/agent": "^3.1.0"
+    "@dfinity/agent": "^3.1.0",
+    "lucide-react": "^0.537.0",
+    "three": "^0.179.1",
+    "vanta": "^0.5.24"
   }
 }

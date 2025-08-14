@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import * as THREE from "three";
+import TOPOLOGY from "vanta/dist/vanta.topology.min";
 import {
   Bitcoin,
   Shield,
@@ -13,6 +15,32 @@ import {
 interface LandingPageProps {
   onGetStarted: () => void;
 }
+
+const [vantaEffect, setVantaEffect] = useState<any>(null);
+const vantaRef = useRef<HTMLDivElement>(null);
+
+useEffect(() => {
+  if (!vantaEffect) {
+    setVantaEffect(
+      TOPOLOGY({
+        el: vantaRef.current,
+        THREE,
+        mouseControls: true,
+        touchControls: true,
+        minHeight: 200.0,
+        minWidth: 200.0,
+        scale: 1.0,
+        scaleMobile: 1.0,
+        color: 0xffd700, // bitcoin gold
+        backgroundColor: 0x000000, // black background
+      })
+    );
+  }
+  return () => {
+    if (vantaEffect) vantaEffect.destroy();
+  };
+}, [vantaEffect]);
+
 
 const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
   return (
@@ -52,30 +80,35 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
       </nav>
 
       {/* Hero Section */}
-      <section className="mx-auto max-w-6xl px-6 py-20 text-center">
-        <h1 className="text-headline mb-6 leading-tight font-bold uppercase md:text-7xl">
-          <span className="from-primary via-bitcoin-gold to-mint-green bg-gradient-to-r bg-clip-text text-transparent">
-            Where Bitcoin
-          </span>
-          <br />
-          <span className="text-white">Backs You</span>
-        </h1>
-        <p className="text-body text-light-grey/80 mx-auto mb-8 max-w-3xl md:text-xl">
-          Powered by AI, Secured on ICP. The future of Bitcoin-backed lending is
-          here.
-        </p>
-        <div className="flex flex-col justify-center gap-4 sm:flex-row">
-          <button
-            onClick={onGetStarted}
-            className="bg-primary hover:bg-primary/90 text-bitcoin-gold text-body shadow-soft hover:shadow-glow transform rounded-xl px-8 py-4 font-medium uppercase transition-all duration-300 hover:-translate-y-1"
-          >
-            Get Started <ArrowRight className="ml-2 inline" size={24} />
-          </button>
-          <button className="border-bitcoin-gold text-bitcoin-gold text-body hover:bg-bitcoin-gold hover:text-primary rounded-xl border-2 px-8 py-4 font-medium uppercase transition-all duration-300">
-            Explore Platform
-          </button>
-        </div>
-      </section>
+      <section
+  ref={vantaRef}
+  className="relative mx-auto max-w-6xl px-6 py-20 text-center text-white overflow-hidden"
+>
+  <div className="relative z-10">
+    <h1 className="text-headline mb-6 leading-tight font-bold uppercase md:text-7xl">
+      <span className="from-primary via-bitcoin-gold to-mint-green bg-gradient-to-r bg-clip-text text-transparent">
+        Where Bitcoin
+      </span>
+      <br />
+      <span className="text-white">Backs You</span>
+    </h1>
+    <p className="text-body text-light-grey/80 mx-auto mb-8 max-w-3xl md:text-xl">
+      Powered by AI, Secured on ICP. The future of Bitcoin-backed lending is here.
+    </p>
+    <div className="flex flex-col justify-center gap-4 sm:flex-row">
+      <button
+        onClick={onGetStarted}
+        className="bg-primary hover:bg-primary/90 text-bitcoin-gold text-body shadow-soft hover:shadow-glow transform rounded-xl px-8 py-4 font-medium uppercase transition-all duration-300 hover:-translate-y-1"
+      >
+        Get Started <ArrowRight className="ml-2 inline" size={24} />
+      </button>
+      <button className="border-bitcoin-gold text-bitcoin-gold text-body hover:bg-bitcoin-gold hover:text-primary rounded-xl border-2 px-8 py-4 font-medium uppercase transition-all duration-300">
+        Explore Platform
+      </button>
+    </div>
+  </div>
+</section>
+
 
       {/* How It Works */}
       <section id="how-it-works" className="mx-auto max-w-7xl px-6 py-20">
