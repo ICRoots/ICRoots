@@ -26,7 +26,7 @@ const VantaFog: React.FC = () => {
           blurFactor: 0.6,
           speed: 1.0,
           zoom: 0.8,
-        })
+        }),
       );
     }
     return () => {

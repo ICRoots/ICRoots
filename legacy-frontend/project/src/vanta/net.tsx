@@ -24,7 +24,7 @@ const VantaNet: React.FC = () => {
           points: 12.0,
           maxDistance: 20.0,
           spacing: 15.0,
-        })
+        }),
       );
     }
     return () => {

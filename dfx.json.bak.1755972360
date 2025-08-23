@@ -1,0 +1,35 @@
+{
+  "dfx": "0.27.0",
+  "canisters": {
+    "loans_backend": {
+      "type": "custom",
+      "candid": "src/backend/canisters/loans/loans_backend.did",
+      "wasm": "target/wasm32-unknown-unknown/release/loans_backend.wasm",
+      "build": "cargo build --release --target wasm32-unknown-unknown --manifest-path src/backend/canisters/loans/Cargo.toml"
+    },
+    "collateral_backend": {
+      "type": "custom",
+      "candid": "src/backend/canisters/collateral/collateral_backend.did",
+      "wasm": "target/wasm32-unknown-unknown/release/collateral_backend.wasm",
+      "build": "cargo build --release --target wasm32-unknown-unknown --manifest-path src/backend/canisters/collateral/Cargo.toml"
+    },
+    "repute_backend": {
+      "type": "custom",
+      "candid": "src/backend/canisters/repute/repute_backend.did",
+      "wasm": "target/wasm32-unknown-unknown/release/repute_backend.wasm",
+      "build": "cargo build --release --target wasm32-unknown-unknown --manifest-path src/backend/canisters/repute/Cargo.toml"
+    },
+    "trust_ai_backend": {
+      "type": "custom",
+      "candid": "src/backend/canisters/trust_ai/trust_ai_backend.did",
+      "wasm": "target/wasm32-unknown-unknown/release/trust_ai_backend.wasm",
+      "build": "cargo build --release --target wasm32-unknown-unknown --manifest-path src/backend/canisters/trust_ai/Cargo.toml"
+    },
+    "event_bus_backend": {
+      "type": "custom",
+      "candid": "src/backend/canisters/event_bus/event_bus_backend.did",
+      "wasm": "target/wasm32-unknown-unknown/release/event_bus_backend.wasm",
+      "build": "cargo build --release --target wasm32-unknown-unknown --manifest-path src/backend/canisters/event_bus/Cargo.toml"
+    }
+  }
+}

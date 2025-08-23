@@ -1,4 +1,3 @@
-
 # ICRoots 🌳🔗
 
 _Bitcoin lending, rooted in trust._
@@ -61,15 +60,19 @@ ICRoots/
 ├─ dfx.json           # workspace definition
 └─ README.md          # (you are here)
 ```
+
 ---
 
 ## 5 Local Dev Loop
+
 ### 1 — Prereqs
+
 ```
 node >=18     dfx >=0.27     cargo >=1.77
 ```
 
 ### 2 — Clone & install deps
+
 ```
 git clone https://github.com/ICRoots/ICRoots.git
 cd ICRoots
@@ -78,17 +81,20 @@ npm install                  # installs front-end + husky hooks
 ```
 
 ### 3 — Run ICP locally + front-end
+
 ```
 dfx start --background
 dfx deploy                   # builds + installs all canisters
 ```
 
 ### modern UI (Vite)
+
 ```
 npm run --workspace src/frontend dev          # http://localhost:5173
 ```
 
 ### legacy Netlify UI (for reference)
+
 ```
 npm run --workspace legacy-frontend dev       # http://localhost:5180
 ```
