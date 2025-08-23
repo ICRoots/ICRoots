@@ -1,159 +1,141 @@
 
+
 # ICRoots 🌳🔗
 
-_Bitcoin lending, rooted in trust._
+*Bitcoin lending, rooted in trust.*
 
-Collateralize BTC, borrow stable-coins, and earn reputation NFTs – all **on-chain** on the Internet Computer (ICP).
-
----
-
-## 1 Why ICRoots?
-
-Millions of BTC holders sit on locked value but lack fast, non-custodial liquidity.  
-ICRoots fixes that with three super-powers:
-
-1. **BTC-backed loans** – keep your coins, unlock short-term cash.
-2. **Soul-bound NFT reputation** – trust level grows (or shrinks) with every repayment.
-3. **AI copilot** – on-chain risk scoring and loan matchmaking.
+Unlock liquidity against BTC without giving up keys. Borrow stablecoins, build a soul-bound reputation, and get AI-assisted risk checks — all **on-chain** on the Internet Computer (ICP).
 
 ---
 
-## 2 Service Anatomy
+## 1) Why now?
 
-| Concern                      | Canister (crate)     | Why isolated?                   | Status           |
-| ---------------------------- | -------------------- | ------------------------------- | ---------------- |
-| Loan ledger & core state     | **`loans_backend`**  | Small, auditable upgrades       | **LIVE (local)** |
-| BTC custody & liquidation    | `collateral_backend` | Strong security boundary        | scaffold         |
-| Reputation NFTs (soul-bound) | `repute_backend`     | Separate mint/burn lifecycle    | scaffold         |
-| AI scoring engine            | `trust_ai_backend`   | Heavy WASM, pluggable ML models | scaffold         |
-| UX events / logs             | `event_bus_backend`  | Keep business logic clean       | scaffold         |
+Millions of BTC sit idle. Users want **fast, non-custodial loans** without CEX risk. ICRoots delivers:
+
+1. **BTC-backed loans** — keep your coins, unlock cash.
+2. **Soul-bound reputation** — trust rises (or falls) with your repayments.
+3. **Deterministic AI (today)** — transparent rules for scoring; model plug-in later.
 
 ---
 
-## 3 Tech Stack
+## 2) What’s live right now (local)
+
+* ✅ All five canisters **build & deploy locally** (Rust): `event_bus`, `repute`, `collateral`, `trust_ai`, `loans`
+* ✅ **Smoke tests** pass end-to-end (docs: `docs/local-canister-ids.md` & `docs/ICRoots-Playbook.md`)
+* ✅ **Debug UI** (Vite/React) can call every canister (no wallet needed for the demo)
+
+> Notes for current demo:
+> • **BTC collateral is mocked** (ckBTC/Chain Fusion after demo).
+> • **AI is deterministic** rules now (model integration next).
+> • No Firebase; all core state on ICP.
+
+---
+
+## 3) Service anatomy
+
+| Concern                   | Canister (crate)     | Why isolated?                | Status           |
+| ------------------------- | -------------------- | ---------------------------- | ---------------- |
+| Loan ledger & core state  | **`loans_backend`**  | Small, auditable upgrades    | **LIVE (local)** |
+| BTC custody & liquidation | `collateral_backend` | Security boundary            | **LIVE (local)** |
+| Reputation (soul-bound)   | `repute_backend`     | Separate mint/burn lifecycle | **LIVE (local)** |
+| AI scoring engine         | `trust_ai_backend`   | Heavy WASM, pluggable models | **LIVE (local)** |
+| UX events / logs          | `event_bus_backend`  | Keep business logic clean    | **LIVE (local)** |
+
+**Minimal interfaces (frozen for sprint)**
+
+* `event_bus_backend`: `emit(text)`, `list_recent(nat64) -> vec text (query)`
+* `repute_backend`: `get_level(principal) -> nat (query)`, `set_level(principal, nat)` *(guarded)*
+* `collateral_backend`: `deposit_mock(principal, nat)`, `get_collateral(principal) -> nat`
+* `trust_ai_backend`: `recommend(principal, nat, nat64) -> record { decision:text; score:nat64; reasons:vec text } (query)`
+* `loans_backend`: `ping() -> text`, `register_user()`, `get_summary(principal)`, `request_loan(nat)`, `repay(nat, nat)`
+
+---
+
+## 4) Tech stack
 
 | Layer           | Choice                                         |
 | --------------- | ---------------------------------------------- |
-| Front-end       | React + Vite + TailwindCSS                     |
-| Smart-contracts | ICP canisters (Rust for prod, Motoko for POCs) |
-| Wallet/Auth     | Plug Wallet · Internet Identity                |
-| AI Layer        | OpenAI / Caffeine AI via `trust_ai`            |
-| NFTs            | Soul-bound DIP-721                             |
-| Dev tooling     | `dfx`, `cargo`, `didc 0.4`, Husky, Vitest      |
+| Front-end       | React + Vite + Tailwind                        |
+| Smart-contracts | ICP canisters (Rust, Candid)                   |
+| Wallet/Auth     | Plug / Internet Identity (post-demo)           |
+| AI Layer        | Deterministic rules today; model plug-in later |
+| NFTs            | Soul-bound (DIP-721 compatible)                |
+| Tooling         | `dfx 0.27`, `cargo`, `didc 0.4`, Husky, Vitest |
 
 ---
 
-## 4 Repo Map
+## 5) Repo map
 
 ```
 ICRoots/
 ├─ src/backend/canisters/
-│  ├─ loans/          # Rust crate → loans_backend.wasm
-│  ├─ collateral/
-│  ├─ repute/
-│  ├─ trust_ai/
-│  └─ event_bus/
-├─ src/frontend/      # Vite + React (new UI)
-├─ legacy-frontend/   # 🕰  Original Netlify UI
-├─ docs/              # diagrams & pitch decks
-├─ tests/             # unit + ICP integration
-├─ scripts/           # helper bash scripts
-├─ dfx.json           # workspace definition
-└─ README.md          # (you are here)
-```
----
-
-## 5 Local Dev Loop
-### 1 — Prereqs
-```
-node >=18     dfx >=0.27     cargo >=1.77
-```
-
-### 2 — Clone & install deps
-```
-git clone https://github.com/ICRoots/ICRoots.git
-cd ICRoots
-cp .env.sample .env          # adjust NETWORK / wallet if needed
-npm install                  # installs front-end + husky hooks
-```
-
-### 3 — Run ICP locally + front-end
-```
-dfx start --background
-dfx deploy                   # builds + installs all canisters
-```
-
-### modern UI (Vite)
-```
-npm run --workspace src/frontend dev          # http://localhost:5173
-```
-
-### legacy Netlify UI (for reference)
-```
-npm run --workspace legacy-frontend dev       # http://localhost:5180
-```
-
-### Back-end tests
-
-```
-cargo test --manifest-path src/backend/canisters/loans/Cargo.toml
-```
-
-### Regenerate Candid (didc 0.4)
-
-```
-cargo build --manifest-path src/backend/canisters/loans/Cargo.toml \
-            --release --target wasm32-unknown-unknown
-
-didc bind --target did \
-  target/wasm32-unknown-unknown/release/loans_backend.wasm \
-  > src/backend/canisters/loans/loans_backend.did
+│  ├─ loans/        ├─ collateral/ ├─ repute/ ├─ trust_ai/ └─ event_bus/
+├─ src/frontend/           # Vite + React (new debug UI)
+├─ legacy-frontend/        # Original Netlify UI
+├─ docs/                   # Playbook + local canister IDs
+├─ tests/                  # unit + ICP integration
+├─ scripts/                # helper scripts
+├─ dfx.json
+└─ README.md
 ```
 
 ---
 
-## 6 Deploying to Main-net (coming soon)
+## 6) 2-minute local demo
+
+**Prereqs**: `node >= 18`, `dfx >= 0.27`, `cargo >= 1.77`, `didc 0.4`
 
 ```bash
-dfx identity use prod-owner          # secure identity
-dfx build  loans_backend --network ic
-dfx deploy loans_backend --network ic --yes
+# 1) start ICP + deploy
+dfx start --background
+dfx deploy       # builds & installs all five canisters (local)
+
+# 2) run the frontend debug UI
+cd src/frontend
+npm install
+npm run dev      # open http://localhost:5173
 ```
 
-| Component     | Canister ID (main-net) | Gateway URL | Notes                            |
-| ------------- | ---------------------- | ----------- | -------------------------------- |
-| loans_backend | _(pending)_            | _(pending)_ | will be added after cycle top-up |
+**In the Debug UI**, try:
+
+* Event Bus → **emit + list\_recent**
+* Repute → **get\_level**
+* Collateral → **deposit\_mock + get\_collateral**
+* Trust AI → **recommend** (returns decision + score)
+* Loans → **ping / register\_user / request\_loan / repay**
+
+> Canister IDs used by the UI come from `docs/local-canister-ids.md` / `.dfx/local`.
 
 ---
 
-## 7 Hosted Preview
+## 7) Security & design choices (at the moment)
 
-- Legacy UI (Netlify): **[https://myicroots.netlify.app](https://myicroots.netlify.app)**
-    → folder: `legacy-frontend/`
-
----
-
-## 8 Post-Qualification Roadmap
-
-- 🔄 Wire `loans_backend` to real ckBTC custody via **Chain Fusion**
-- 🏷️ Launch `repute_backend` soul-bound NFT minting
-- 🤖 Deploy first ML model in `trust_ai_backend`
-- 📱 Ship PWA wrapper for emerging-market users
+* **Deterministic AI**: transparent thresholds.
+* **Separation of concerns**: loan core vs collateral vs reputation to keep upgrades auditable.
+* **Event bus** for UX analytics/logs without polluting business logic.
 
 ---
 
-## 9 Contributing
+## 8) Roadmap (post-qualification)
 
-- **Branches** — `feat/✏️`, `fix/🐛`, `docs/📚`
-- Run `npm run lint && npm test` before pushing
-- PRs & issue discussions welcome!
+* 🔄 Wire real **ckBTC** custody via Chain Fusion; liquidation hooks
+* 🏷️ Launch **soul-bound NFT** mint/burn and FE display
+* 🤖 Swap deterministic rules for pluggable ML model in `trust_ai`
+* 🌐 Public canister deploy + wallet flows (Plug / II)
+* 📱 PWA wrapper for low-bandwidth users
 
 ---
 
-## 10 License
+## 9) Contributing
+
+* Branches: `feat/*`, `fix/*`, `docs/*`
+* Run `npm run lint && npm test` before PRs
+* Feedback & issues welcome!
+
+---
+
+## 10) License
 
 MIT © 2025 ICRoots team.
 
----
-
-_Let’s build a fairer, faster Bitcoin credit market – together._ 🚀
+> *Let’s build a fairer, faster Bitcoin credit market — together.* 🚀

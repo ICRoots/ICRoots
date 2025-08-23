@@ -26,7 +26,7 @@ const VantaClouds: React.FC = () => {
           sunColor: 0xffcc00,
           sunGlareColor: 0xff9900,
           speed: 1.0,
-        })
+        }),
       );
     }
     return () => {

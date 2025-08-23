@@ -24,7 +24,7 @@ const VantaWaves: React.FC = () => {
           waveHeight: 20,
           waveSpeed: 1,
           zoom: 0.85,
-        })
+        }),
       );
     }
     return () => {

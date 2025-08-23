@@ -28,7 +28,7 @@ const VantaBirds: React.FC = () => {
           separation: 50.0,
           alignment: 50.0,
           cohesion: 20.0,
-        })
+        }),
       );
     }
     return () => {

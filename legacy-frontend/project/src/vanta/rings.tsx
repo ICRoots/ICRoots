@@ -22,7 +22,7 @@ const VantaRings: React.FC = () => {
           backgroundColor: 0x081b29,
           color: 0x00ffd5,
           backgroundAlpha: 1.0,
-        })
+        }),
       );
     }
     return () => {

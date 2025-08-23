@@ -8,7 +8,10 @@ interface VantaTopologyProps {
   className?: string;
 }
 
-const VantaTopology: React.FC<VantaTopologyProps> = ({ options = {}, className }) => {
+const VantaTopology: React.FC<VantaTopologyProps> = ({
+  options = {},
+  className,
+}) => {
   const vantaRef = useRef<HTMLDivElement>(null);
   const [vantaEffect, setVantaEffect] = useState<any>(null);
 
@@ -27,7 +30,7 @@ const VantaTopology: React.FC<VantaTopologyProps> = ({ options = {}, className }
           backgroundColor: 0x081b29,
           color: 0x00ffd5,
           ...options, // allow overrides
-        })
+        }),
       );
     }
     return () => {

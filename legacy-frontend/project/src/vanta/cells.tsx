@@ -24,7 +24,7 @@ const VantaCells: React.FC = () => {
           color2: 0x00ff00,
           size: 1.5,
           speed: 1.0,
-        })
+        }),
       );
     }
     return () => {

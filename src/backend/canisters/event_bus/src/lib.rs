@@ -1,14 +1,31 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
+use ic_cdk_macros::{update, query};
+use std::cell::RefCell;
+use std::collections::VecDeque;
+
+const MAX_EVENTS: usize = 200;
+
+thread_local! {
+    static EVENTS: RefCell<VecDeque<String>> = RefCell::new(VecDeque::new());
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+/// Append an event (keeps only the latest MAX_EVENTS)
+#[update]
+fn emit(event: String) {
+    EVENTS.with(|cell| {
+        let mut q = cell.borrow_mut();
+        if q.len() >= MAX_EVENTS {
+            q.pop_front();
+        }
+        q.push_back(event);
+    });
+}
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+/// Return up to `limit` most recent events (newest first)
+#[query]
+fn list_recent(limit: u64) -> Vec<String> {
+    EVENTS.with(|cell| {
+        let q = cell.borrow();
+        let take_n = (limit as usize).min(q.len());
+        q.iter().rev().take(take_n).cloned().collect()
+    })
 }

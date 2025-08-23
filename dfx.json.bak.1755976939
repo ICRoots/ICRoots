@@ -1,0 +1,51 @@
+{
+  "dfx": "0.27.0",
+  "canisters": {
+    "loans_backend": {
+      "type": "rust",
+      "package": "loans_backend",
+      "candid": "src/loans_backend/loans_backend.did",
+      "declarations": {
+        "bindings": ["ts", "did"],
+        "output": "src/declarations/loans_backend"
+      }
+    },
+    "collateral_backend": {
+      "type": "rust",
+      "package": "collateral_backend",
+      "candid": "src/backend/canisters/collateral/collateral_backend.did",
+      "declarations": {
+        "bindings": ["ts", "did"],
+        "output": "src/declarations/collateral_backend"
+      }
+    },
+    "repute_backend": {
+      "type": "rust",
+      "package": "repute_backend",
+      "candid": "src/backend/canisters/repute/repute_backend.did",
+      "declarations": {
+        "bindings": ["ts", "did"],
+        "output": "src/declarations/repute_backend"
+      }
+    },
+    "trust_ai_backend": {
+      "type": "rust",
+      "package": "trust_ai_backend",
+      "candid": "src/backend/canisters/trust_ai/trust_ai_backend.did",
+      "declarations": {
+        "bindings": ["ts", "did"],
+        "output": "src/declarations/trust_ai_backend"
+      }
+    },
+    "event_bus_backend": {
+      "type": "rust",
+      "package": "event_bus_backend",
+      "candid": "src/backend/canisters/event_bus/event_bus_backend.did",
+      "declarations": {
+        "bindings": ["ts", "did"],
+        "output": "src/declarations/event_bus_backend"
+      }
+    }
+  },
+  "version": 1
+}

@@ -23,7 +23,7 @@ const VantaHalo: React.FC = () => {
           color: 0x00ffd5,
           amplitudeFactor: 1.5,
           size: 1.2,
-        })
+        }),
       );
     }
     return () => {
