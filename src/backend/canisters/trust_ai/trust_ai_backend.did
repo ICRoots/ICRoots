@@ -6,7 +6,7 @@ type InitArgs = record {
 
 type Recommendation = record {
   decision : text;
-  score : nat;
+  score : nat64;
   reasons : vec text;
 };
 
