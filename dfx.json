@@ -13,7 +13,7 @@
     "collateral_backend": {
       "type": "rust",
       "package": "collateral_backend",
-      "candid": "src/collateral_backend/collateral_backend.did",
+      "candid": "src/backend/canisters/collateral/collateral_backend.did",
       "declarations": {
         "bindings": ["ts", "did"],
         "output": "src/declarations/collateral_backend"
@@ -31,7 +31,7 @@
     "trust_ai_backend": {
       "type": "rust",
       "package": "trust_ai_backend",
-      "candid": "src/trust_ai_backend/trust_ai_backend.did",
+      "candid": "src/backend/canisters/trust_ai/trust_ai_backend.did",
       "declarations": {
         "bindings": ["ts", "did"],
         "output": "src/declarations/trust_ai_backend"
