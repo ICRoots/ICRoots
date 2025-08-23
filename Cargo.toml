@@ -1,5 +1,6 @@
 [workspace]
 members = [
-  "src/backend/canisters/event_bus"
+  "src/backend/canisters/event_bus",
+  "src/backend/canisters/repute",
 ]
 resolver = "2"

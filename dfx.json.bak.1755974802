@@ -22,7 +22,7 @@
     "repute_backend": {
       "type": "rust",
       "package": "repute_backend",
-      "candid": "src/backend/canisters/repute/repute_backend.did",
+      "candid": "src/repute_backend/repute_backend.did",
       "declarations": {
         "bindings": ["ts", "did"],
         "output": "src/declarations/repute_backend"
