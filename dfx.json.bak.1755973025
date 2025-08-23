@@ -40,7 +40,7 @@
     "event_bus_backend": {
       "type": "rust",
       "package": "event_bus_backend",
-      "candid": "src/backend/canisters/event_bus/event_bus_backend.did",
+      "candid": "src/event_bus_backend/event_bus_backend.did",
       "declarations": {
         "bindings": ["ts", "did"],
         "output": "src/declarations/event_bus_backend"
