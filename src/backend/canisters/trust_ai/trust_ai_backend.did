@@ -1,7 +1,7 @@
 type InitArgs = record {
   min_collateral : opt nat;
-  min_trust : opt nat;
-  trust_cap : opt nat;
+  min_trust : opt nat64;
+  trust_cap : opt nat64;
 };
 
 type Recommendation = record {
@@ -11,5 +11,5 @@ type Recommendation = record {
 };
 
 service : (opt InitArgs) -> {
-  recommend : (principal, nat, nat) -> (Recommendation) query;
+  recommend : (principal, nat, nat64) -> (Recommendation) query;
 }
