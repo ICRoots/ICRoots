@@ -1,1 +1,33 @@
-service : {};
+type InitArgs = record {
+  admin : opt principal;
+  repute : opt principal;
+  collateral : opt principal;
+  trust_ai : opt principal;
+  event_bus : opt principal;
+};
+
+type LoanInfo = record { id : nat; amount : nat; status : text };
+type Summary = record {
+  registered : bool;
+  level : nat64;
+  collateral : nat;
+  outstanding : nat;
+  loans : vec LoanInfo;
+};
+
+type LoanDecision = record {
+  loan_id : opt nat;
+  decision : text;
+  score : nat64;
+  reasons : vec text;
+};
+
+type RepayResult = record { repaid : nat; remaining : nat; status : text };
+
+service : (opt InitArgs) -> {
+  ping : () -> (text) query;
+  register_user : () -> ();
+  get_summary : (principal) -> (Summary);
+  request_loan : (nat) -> (LoanDecision);
+  repay : (nat, nat) -> (RepayResult);
+}

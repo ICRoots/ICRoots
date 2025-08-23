@@ -4,7 +4,7 @@
     "loans_backend": {
       "type": "rust",
       "package": "loans_backend",
-      "candid": "src/backend/canisters/loans/loans_backend.did",
+      "candid": "src/loans_backend/loans_backend.did",
       "declarations": {
         "bindings": ["ts", "did"],
         "output": "src/declarations/loans_backend"
