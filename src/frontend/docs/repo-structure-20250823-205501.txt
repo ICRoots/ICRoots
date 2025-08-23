@@ -1,0 +1,47 @@
+# Repo structure (lightweight) — 2025-08-23T20:55:01+01:00
+
+.
+├── assets
+│   └── React-icon.webp
+├── docs
+│   └── repo-structure-20250823-205501.txt
+├── frontend-test-setup.ts
+├── index.html
+├── main.tsx
+├── package.json
+├── scripts
+│   └── fe-prereq-check.sh
+├── src
+│   ├── App.tsx
+│   ├── components
+│   │   ├── Button.tsx
+│   │   ├── Card.tsx
+│   │   ├── ErrorDisplay.tsx
+│   │   ├── index.ts
+│   │   ├── InputField.tsx
+│   │   ├── Loader.tsx
+│   │   └── TextArea.tsx
+│   ├── index.css
+│   ├── services
+│   │   └── backendService.ts
+│   └── views
+│       ├── CounterView.tsx
+│       ├── DebugIcpage.tsx
+│       ├── GreetingView.tsx
+│       ├── index.ts
+│       └── LlmPromptView.tsx
+├── tests
+│   ├── App.test.tsx
+│   ├── services
+│   │   └── backendService.test.ts
+│   └── views
+│       ├── CounterView.test.tsx
+│       ├── GreetingView.test.tsx
+│       └── LlmPromptView.test.tsx
+├── tsconfig.json
+├── vite.config.ts
+└── vite-env.d.ts
+
+11 directories, 30 files
+
+## Canister IDs
