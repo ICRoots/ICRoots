@@ -8,12 +8,7 @@
       "declarations": {
         "bindings": ["ts", "did"],
         "output": "src/declarations/loans_backend"
-      },
-      "metadata": [
-        {
-          "name": "candid:service"
-        }
-      ]
+      }
     },
     "collateral_backend": {
       "type": "rust",
@@ -22,12 +17,7 @@
       "declarations": {
         "bindings": ["ts", "did"],
         "output": "src/declarations/collateral_backend"
-      },
-      "metadata": [
-        {
-          "name": "candid:service"
-        }
-      ]
+      }
     },
     "repute_backend": {
       "type": "rust",
@@ -36,12 +26,7 @@
       "declarations": {
         "bindings": ["ts", "did"],
         "output": "src/declarations/repute_backend"
-      },
-      "metadata": [
-        {
-          "name": "candid:service"
-        }
-      ]
+      }
     },
     "trust_ai_backend": {
       "type": "rust",
@@ -50,12 +35,7 @@
       "declarations": {
         "bindings": ["ts", "did"],
         "output": "src/declarations/trust_ai_backend"
-      },
-      "metadata": [
-        {
-          "name": "candid:service"
-        }
-      ]
+      }
     },
     "event_bus_backend": {
       "type": "rust",
@@ -64,12 +44,7 @@
       "declarations": {
         "bindings": ["ts", "did"],
         "output": "src/declarations/event_bus_backend"
-      },
-      "metadata": [
-        {
-          "name": "candid:service"
-        }
-      ]
+      }
     }
   },
   "version": 1

@@ -22,3 +22,6 @@ dist/
 
 # environment variables
 .env
+
+# allow declarations
+!src/declarations/**

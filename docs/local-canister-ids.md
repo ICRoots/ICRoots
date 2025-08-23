@@ -44,6 +44,7 @@ Deployer (admin): `br5q6-2zqd6-6h4ci-gfe4o-kma7j-udnvx-tbrdr-rs65g-nd7jm-queti-y
 ```
 
 ### event_bus_backend (retest after DID fix)
+
 ```
 (vec { "smoke:event_bus ok v2" })
 ```
