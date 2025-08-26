@@ -1,1 +1,22 @@
-{"rustc":11410426090777951712,"features":"[]","declared_features":"[]","target":9491179772296838714,"profile":1369601567987815722,"path":9579728135653304440,"deps":[[8618134998088965173,"build_script_build",false,11474601464489590469]],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/psm-af6140cb89c4ffda/dep-lib-psm","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+{
+  "rustc": 11410426090777951712,
+  "features": "[]",
+  "declared_features": "[]",
+  "target": 9491179772296838714,
+  "profile": 1369601567987815722,
+  "path": 9579728135653304440,
+  "deps": [
+    [8618134998088965173, "build_script_build", false, 11474601464489590469]
+  ],
+  "local": [
+    {
+      "CheckDepInfo": {
+        "dep_info": "release/.fingerprint/psm-af6140cb89c4ffda/dep-lib-psm",
+        "checksum": false
+      }
+    }
+  ],
+  "rustflags": [],
+  "config": 2069994364910194474,
+  "compile_kind": 0
+}

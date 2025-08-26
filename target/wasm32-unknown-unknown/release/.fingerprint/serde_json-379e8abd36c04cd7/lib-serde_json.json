@@ -1,1 +1,26 @@
-{"rustc":11410426090777951712,"features":"[\"default\", \"std\"]","declared_features":"[\"alloc\", \"arbitrary_precision\", \"default\", \"float_roundtrip\", \"indexmap\", \"preserve_order\", \"raw_value\", \"std\", \"unbounded_depth\"]","target":9592559880233824070,"profile":2040997289075261528,"path":16020099626344076874,"deps":[[1216309103264968120,"ryu",false,16452949907189880401],[4352886507220678900,"build_script_build",false,636804422937789361],[7695812897323945497,"itoa",false,12288355783467110577],[9689903380558560274,"serde",false,15373601811867686003],[15932120279885307830,"memchr",false,7255400408907514840]],"local":[{"CheckDepInfo":{"dep_info":"wasm32-unknown-unknown/release/.fingerprint/serde_json-379e8abd36c04cd7/dep-lib-serde_json","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":14682669768258224367}
+{
+  "rustc": 11410426090777951712,
+  "features": "[\"default\", \"std\"]",
+  "declared_features": "[\"alloc\", \"arbitrary_precision\", \"default\", \"float_roundtrip\", \"indexmap\", \"preserve_order\", \"raw_value\", \"std\", \"unbounded_depth\"]",
+  "target": 9592559880233824070,
+  "profile": 2040997289075261528,
+  "path": 16020099626344076874,
+  "deps": [
+    [1216309103264968120, "ryu", false, 16452949907189880401],
+    [4352886507220678900, "build_script_build", false, 636804422937789361],
+    [7695812897323945497, "itoa", false, 12288355783467110577],
+    [9689903380558560274, "serde", false, 15373601811867686003],
+    [15932120279885307830, "memchr", false, 7255400408907514840]
+  ],
+  "local": [
+    {
+      "CheckDepInfo": {
+        "dep_info": "wasm32-unknown-unknown/release/.fingerprint/serde_json-379e8abd36c04cd7/dep-lib-serde_json",
+        "checksum": false
+      }
+    }
+  ],
+  "rustflags": [],
+  "config": 2069994364910194474,
+  "compile_kind": 14682669768258224367
+}
