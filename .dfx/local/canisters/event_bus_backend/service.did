@@ -1,0 +1,6 @@
+type Event = text;
+
+service : {
+  emit: (Event) -> ();
+  list_recent: (nat64) -> (vec Event) query;
+}

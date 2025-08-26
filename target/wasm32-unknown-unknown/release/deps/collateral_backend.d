@@ -1,0 +1,5 @@
+/home/lanacreates/ICRoots/target/wasm32-unknown-unknown/release/deps/collateral_backend.d: src/backend/canisters/collateral/src/lib.rs
+
+/home/lanacreates/ICRoots/target/wasm32-unknown-unknown/release/deps/collateral_backend.wasm: src/backend/canisters/collateral/src/lib.rs
+
+src/backend/canisters/collateral/src/lib.rs:
