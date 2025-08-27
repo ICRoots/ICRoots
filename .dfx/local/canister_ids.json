@@ -1,0 +1,17 @@
+{
+  "collateral_backend": {
+    "local": "vizcg-th777-77774-qaaea-cai"
+  },
+  "event_bus_backend": {
+    "local": "vpyes-67777-77774-qaaeq-cai"
+  },
+  "loans_backend": {
+    "local": "vg3po-ix777-77774-qaafa-cai"
+  },
+  "repute_backend": {
+    "local": "vb2j2-fp777-77774-qaafq-cai"
+  },
+  "trust_ai_backend": {
+    "local": "vu5yx-eh777-77774-qaaga-cai"
+  }
+}

@@ -1,0 +1,11 @@
+type InitArgs = record {
+  trust_cap : opt nat64;
+  min_trust : opt nat64;
+  min_collateral : opt nat;
+};
+type Recommendation = record {
+  reasons : vec text;
+  decision : text;
+  score : nat64;
+};
+service : { recommend : (principal, nat, nat64) -> (Recommendation) query }
