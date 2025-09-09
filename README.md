@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-ICRoots
-=======
-Here’s a fresh, judge-friendly **README.md** you can drop in:
-
----
-
 # ICRoots 🌳🔗
 
 _Bitcoin lending, rooted in trust._
