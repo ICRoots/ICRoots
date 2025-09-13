@@ -109,3 +109,5 @@ fn ensure_can_set() -> Result<(), String> {
         }
     })
 }
+
+ic_cdk::export_candid!();

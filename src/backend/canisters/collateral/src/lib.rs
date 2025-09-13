@@ -71,18 +71,20 @@ fn post_upgrade() {
     STATE.with(|s| *s.borrow_mut() = st);
 }
 
-#[query]
-fn get_collateral(p: Principal) -> u128 {
-    STATE.with(|s| *s.borrow().balances.get(&p).unwrap_or(&0))
+#[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
+struct CollateralInfo {
+    amount: u128,
+    deposited_at: u64,
+}
+
+thread_local! {
+    static COLLATERAL_STORE: RefCell<HashMap<Principal, CollateralInfo>> = RefCell::new(HashMap::new());
 }
 
 #[update]
-async fn deposit_mock(p: Principal, amount: u128) {
-    ensure_can_deposit().unwrap_or_else(|e| trap(&e));
-    if amount == 0 {
-        trap("amount must be > 0");
-    }
-
+async fn deposit_mock(user: Principal, amount: u128) {
+    ensure_can_deposit().unwrap();
+    let p = user;
     STATE.with(|s| {
         let mut st = s.borrow_mut();
         let entry = st.balances.entry(p).or_insert(0);
@@ -124,3 +126,5 @@ mod tests {
         assert_eq!(get_collateral(me), 0);
     }
 }
+
+ic_cdk::export_candid!();

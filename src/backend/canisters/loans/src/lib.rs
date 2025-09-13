@@ -318,3 +318,5 @@ async fn repay(loan_id: u128, amount: u128) -> RepayResult {
 
     result
 }
+
+ic_cdk::export_candid!();

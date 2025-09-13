@@ -29,3 +29,5 @@ fn list_recent(limit: u64) -> Vec<String> {
         q.iter().rev().take(take_n).cloned().collect()
     })
 }
+
+ic_cdk::export_candid!();

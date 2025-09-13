@@ -17,7 +17,7 @@ generate_candid_for_canister() {
   fi
   
   # Extract the Candid interface
-  candid-extractor target/wasm32-unknown-unknown/release/$canister.wasm > src/$canister/$canister.did
+  candid-extractor target/wasm32-unknown-unknown/release/$canister.wasm > src/backend/canisters/$canister_base_name/$canister.did
   
   if [ $? -ne 0 ]; then
     echo "Error: Failed to extract Candid interface for canister $canister"

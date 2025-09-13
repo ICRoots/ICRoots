@@ -9,5 +9,8 @@ type Recommendation = record {
   score : nat64;
 };
 service : (opt InitArgs) -> {
+  // Deterministic recommendation using inputs + config.
+  // - `collateral`: u128 amount in smallest units
+  // - `trust`: u64 score (we clamp to `trust_cap`)
   recommend : (principal, nat, nat64) -> (Recommendation) query;
 }

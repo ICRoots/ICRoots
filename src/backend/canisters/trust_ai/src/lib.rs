@@ -120,3 +120,5 @@ fn recommend(_p: Principal, collateral: u128, trust: u64) -> Recommendation {
 
     Recommendation { decision, score, reasons }
 }
+
+ic_cdk::export_candid!();

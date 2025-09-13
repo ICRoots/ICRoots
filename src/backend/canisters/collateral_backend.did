@@ -3,8 +3,4 @@ type InitArgs = record {
   admin : opt principal;
   loans : opt principal;
 };
-
-service : {
-  get_level : (principal) -> (nat64) query;
-  set_level : (principal, nat64) -> ();
-};
+service : (opt InitArgs) -> { deposit_mock : (principal, nat) -> () }

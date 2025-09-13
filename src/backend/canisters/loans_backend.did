@@ -20,7 +20,7 @@ type Summary = record {
   loans : vec LoanInfo;
   registered : bool;
 };
-service : {
+service : (opt InitArgs) -> {
   get_summary : (principal) -> (Summary);
   ping : () -> (text) query;
   register_user : () -> ();

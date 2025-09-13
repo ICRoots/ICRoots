@@ -7,6 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Node dependencies
 node_modules
 dist
 dist-ssr
@@ -23,3 +24,38 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Rust/Cargo
+/target/
+**/*.rs.bk
+.cargo-ok
+
+# Internet Computer / DFX
+.dfx/
+.azle/
+.vessel/
+.icrc-ledger/
+canister_ids.json
+
+# Build artifacts
+/build/
+/out/
+
+# Test artifacts
+/coverage/
+.nyc_output/
+
+# Cache
+.cache/
+.parcel-cache/
+.npm
+
+# Temporary files
+*.tmp
+*.bak
+.temp/
+temp/
+
+# OS specific
+Thumbs.db
+desktop.ini
