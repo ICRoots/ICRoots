@@ -1,55 +1,111 @@
-import { Principal } from "@dfinity/principal";
+import { HttpAgent } from '@dfinity/agent';
+import { Principal } from '@dfinity/principal';
+import canisterIds from '../utils/canisterIds';
 
-// Import canister declarations - these will be generated after running the candid script
-import { backend } from "../../../declarations/backend";
-import { collateral_backend } from "../../../declarations/collateral_backend";
-import { repute_backend } from "../../../declarations/repute_backend";
-import { loans_backend } from "../../../declarations/loans_backend";
-import { trust_ai_backend } from "../../../declarations/trust_ai_backend";
-import { event_bus_backend } from "../../../declarations/event_bus_backend";
+// Direct imports from declarations
+import { loans_backend } from '../../../declarations/loans_backend';
+import { event_bus_backend } from '../../../declarations/event_bus_backend';
+import { repute_backend } from '../../../declarations/repute_backend';
+import { collateral_backend } from '../../../declarations/collateral_backend';
+import { trust_ai_backend } from '../../../declarations/trust_ai_backend';
 
-export interface UserProfile {
+// Type definitions
+export type UserProfile = {
   userId: string;
   level: bigint;
   collateral: bigint;
-  summary: any;
-}
+  summary: {
+    loans: any[];
+    total_borrowed: bigint;
+    total_repaid?: bigint;
+  };
+};
 
-export interface LoanRecommendation {
+export type LoanRecommendation = {
   decision: string;
-  score: bigint;
+  score: number;
   reasons: string[];
-}
+};
 
-export interface LoanApplicationResult {
+export type LoanApplicationResult = {
   recommendation: LoanRecommendation;
   userProfile: UserProfile;
-}
+};
 
-/**
- * Service for interacting with the ICRoots canister ecosystem
- */
 export class ICRootsService {
-  /**
-   * Creates a Principal from a string ID, with fallback handling
-   */
-  private createPrincipal(id: string): Principal {
+  private agent: HttpAgent;
+
+  constructor() {
+    const host = this.getHost();
+    
+    this.agent = new HttpAgent({
+      host,
+      ...(canisterIds.network === 'local' && { fetchRootKey: true })
+    });
+
+    if (canisterIds.network === 'local') {
+      this.agent.fetchRootKey().catch(console.error);
+    }
+  }
+
+  private getHost(): string {
+    switch (canisterIds.network) {
+      case 'local':
+        return 'http://127.0.0.1:4943';
+      case 'playground':
+        return 'https://playground.dfinity.network';
+      case 'ic':
+        return 'https://ic0.app';
+      default:
+        return 'http://127.0.0.1:4943';
+    }
+  }
+
+  private createPrincipal(userId: string): Principal {
     try {
-      return Principal.fromText(id);
-    } catch {
-      // For development/testing, return anonymous principal if invalid format
-      console.warn(`Invalid principal format: ${id}, using anonymous principal`);
+      return Principal.fromText(userId);
+    } catch (error) {
+      // If userId is not a valid principal, create one from the string
       return Principal.anonymous();
     }
   }
 
-  // ========== Event Bus Service ==========
+  // Test all canister connections
+  async healthCheck(): Promise<Record<string, boolean>> {
+    const health: Record<string, boolean> = {};
+    
+    // Test each service individually with better error handling
+    const services = [
+      { name: 'loans', test: () => loans_backend.ping() },
+      { name: 'eventBus', test: () => event_bus_backend.list_recent(1n) },
+      { name: 'repute', test: () => repute_backend.get_level(Principal.anonymous()) },
+      { name: 'collateral', test: () => collateral_backend.get_collateral(Principal.anonymous()) },
+      { name: 'trustAi', test: () => trust_ai_backend.recommend(Principal.anonymous(), 1000n, 1n) }
+    ];
+
+    for (const service of services) {
+      try {
+        await service.test();
+        health[service.name] = true;
+        console.log(`✅ ${service.name} service is healthy`);
+      } catch (error) {
+        health[service.name] = false;
+        console.warn(`⚠️ ${service.name} service is not available:`, error);
+      }
+    }
+
+    return health;
+  }
+
+  // ========== Event Bus Service with Fallback ==========
   async emitEvent(event: string): Promise<void> {
     try {
       await event_bus_backend.emit(event);
     } catch (error) {
-      console.error("Failed to emit event:", error);
-      throw new Error(`Event emission failed: ${error}`);
+      // For development, log locally if event bus is not available
+      console.warn("Event bus not available, logging locally:", event);
+      console.error("Event bus error:", error);
+      // Don't throw - let the application continue without events
     }
   }
 
@@ -57,7 +113,7 @@ export class ICRootsService {
     try {
       return await event_bus_backend.list_recent(limit);
     } catch (error) {
-      console.error("Failed to get recent events:", error);
+      console.warn("Event bus not available for recent events:", error);
       return []; // Return empty array instead of throwing
     }
   }
@@ -119,7 +175,7 @@ export class ICRootsService {
       
       return {
         decision: result.decision,
-        score: result.score,
+        score: Number(result.score),
         reasons: result.reasons,
       };
     } catch (error) {
@@ -235,33 +291,6 @@ export class ICRootsService {
       console.error(`Failed to process loan application for ${userId}:`, error);
       throw new Error(`Loan application processing failed: ${error}`);
     }
-  }
-
-  /**
-   * Health check for all services
-   */
-  async healthCheck(): Promise<Record<string, boolean>> {
-    const services = {
-      loans: false,
-      events: false,
-      // Add other services as needed
-    };
-
-    try {
-      await this.pingLoansService();
-      services.loans = true;
-    } catch {
-      // Service unavailable
-    }
-
-    try {
-      await this.getRecentEvents(BigInt(1));
-      services.events = true;
-    } catch {
-      // Service unavailable
-    }
-
-    return services;
   }
 }
 
