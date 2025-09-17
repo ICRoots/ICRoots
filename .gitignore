@@ -23,7 +23,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-.env
+
 
 # Rust/Cargo
 /target/
@@ -59,3 +59,6 @@ temp/
 # OS specific
 Thumbs.db
 desktop.ini
+
+
+.env
