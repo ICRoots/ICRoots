@@ -106,6 +106,31 @@ npm run dev      # open http://localhost:5173
 
 ---
 
+## 6.5) ICPNinja Mainnet Deployment
+
+**Free mainnet deployment** via [ICPNinja](https://icpninja.com) (no cycles needed!)
+
+```bash
+# 1) Login to dfx (if not already)
+dfx identity login
+
+# 2) Deploy to ICPNinja mainnet
+npm run deploy:icpninja
+
+# 3) Test your live deployment
+npm run test:icpninja
+```
+
+**What happens:**
+- ✅ Deploys all 5 canisters to ICP mainnet **for free**
+- ✅ Links canisters together with proper initialization
+- ✅ Provides live URLs for each canister
+- ✅ Generates environment variables for frontend
+
+**Live URLs format:** `https://<canister-id>.icp0.io`
+
+---
+
 ## 7) Security & design choices (today)
 
 - **Deterministic AI**: transparent thresholds so judges can reason about outcomes.
@@ -116,6 +141,7 @@ npm run dev      # open http://localhost:5173
 
 ## 8) Roadmap (post-qualification)
 
+- ✅ **ICPNinja mainnet deployment** (free!)
 - 🔄 Wire real **ckBTC** custody via Chain Fusion; liquidation hooks
 - 🏷️ Launch **soul-bound NFT** mint/burn and FE display
 - 🤖 Swap deterministic rules for pluggable ML model in `trust_ai`
