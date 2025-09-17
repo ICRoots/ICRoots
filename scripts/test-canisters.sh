@@ -54,9 +54,10 @@ run_test "List recent events" "dfx canister call event_bus_backend list_recent '
 # Test 2: Repute Backend  
 echo -e "\n⭐ Testing Repute Backend"
 echo "========================="
-ANONYMOUS_PRINCIPAL="2vxsx-fae"
+ANONYMOUS_PRINCIPAL=$(dfx identity get-principal)
+echo "Using principal: $ANONYMOUS_PRINCIPAL"
 run_test "Get anonymous user level" "dfx canister call repute_backend get_level '(principal \"$ANONYMOUS_PRINCIPAL\")'"
-run_test "Set user level to 5" "dfx canister call repute_backend set_level '(principal \"$ANONYMOUS_PRINCIPAL\", 5 : nat64)'"
+run_test "Set user level to 5" "dfx canister call repute_backend set_level '(principal \"$ANONYMOUS_PRINCIPAL\", 5)'"
 run_test "Verify level was set" "dfx canister call repute_backend get_level '(principal \"$ANONYMOUS_PRINCIPAL\")'"
 
 # Test 3: Collateral Backend
