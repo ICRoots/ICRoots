@@ -86,9 +86,16 @@ fn pre_upgrade() {
 }
 
 #[post_upgrade]
-fn post_upgrade() {
-    let (st,): (State,) =
+fn post_upgrade(args: Option<InitArgs>) {
+    let (mut st,): (State,) =
         stable_restore().unwrap_or((State { admin: caller(), ..State::default() },));
+    if let Some(args) = args {
+        st.admin = args.admin.unwrap_or(st.admin);
+        st.repute = args.repute.unwrap_or(st.repute);
+        st.collateral = args.collateral.unwrap_or(st.collateral);
+        st.trust_ai = args.trust_ai.unwrap_or(st.trust_ai);
+        st.event_bus = args.event_bus.or(st.event_bus);
+    }
     STATE.with(|s| *s.borrow_mut() = st);
 }
 
