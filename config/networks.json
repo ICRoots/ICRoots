@@ -7,8 +7,8 @@
     "providers": ["https://playground.dfinity.network"],
     "type": "playground"
   },
-  "ic": {
-    "providers": ["https://ic0.app"],
+  "icpninja": {
+    "providers": ["https://icp-api.io"],
     "type": "persistent"
   }
 }
