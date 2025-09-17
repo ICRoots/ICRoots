@@ -14,14 +14,14 @@
     "check-health": "npm run deploy:local && node -e \"import('./src/frontend/src/services/icRootsService.ts').then(s => s.icRootsService.healthCheck().then(console.log))\"",
     "deploy:local": "dfx deploy --network local",
     "deploy:playground": "dfx deploy --network playground --with-cycles 1000000000000",
-    "deploy:ic": "dfx deploy --network ic --with-cycles 1000000000000",
+    "deploy:icpninja": "bash ./scripts/deploy-icpninja.sh",
     "test:local": "npm run deploy:local && npm run test:frontend && npm run test:backend",
     "test:playground": "npm run deploy:playground && npm run test:integration",
     "pre-mainnet-check": "npm run test:local && npm run test:playground",
     "test:canisters": "bash ./scripts/test-canisters.sh",
     "test:frontend:services": "vitest run src/frontend/tests/services/",
     "test:integration": "npm run test:canisters && npm run test:frontend:services",
-    "test:health": "node -e \"import('./src/frontend/src/services/icRootsService.js').then(s => s.icRootsService.healthCheck().then(console.log))\""
+    "test:icpninja": "bash ./scripts/test-icpninja.sh"
   },
   "dependencies": {
     "@dfinity/agent": "^3.0.0",
