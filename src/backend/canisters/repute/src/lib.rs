@@ -1,4 +1,4 @@
-use candid::{CandidType, Deserialize, Principal};
+use candid::{CandidType, Deserialize, Principal, Nat};
 use ic_cdk::{api::caller, call, trap};
 use ic_cdk::storage::{stable_restore, stable_save};
 use ic_cdk_macros::{init, post_upgrade, pre_upgrade, query, update};
@@ -12,7 +12,7 @@ struct State {
     /// Principals allowed to call `set_level` (e.g., loans canister)
     allowed_setters: HashSet<Principal>,
     /// Reputation levels
-    levels: HashMap<Principal, u64>,
+    levels: HashMap<Principal, Nat>,
     /// Optional event bus canister to emit audit events
     event_bus: Option<Principal>,
 }
@@ -74,15 +74,15 @@ fn post_upgrade() {
 }
 
 #[query]
-fn get_level(p: Principal) -> u64 {
-    STATE.with(|s| *s.borrow().levels.get(&p).unwrap_or(&0))
+fn get_level(p: Principal) -> Nat {
+    STATE.with(|s| s.borrow().levels.get(&p).cloned().unwrap_or(Nat::from(0u64)))
 }
 
 #[update]
-async fn set_level(p: Principal, level: u64) {
+async fn set_level(p: Principal, level: Nat) {
     ensure_can_set().unwrap_or_else(|e| trap(&e));
     STATE.with(|s| {
-        s.borrow_mut().levels.insert(p, level);
+        s.borrow_mut().levels.insert(p, level.clone());
     });
 
     // best-effort event emission

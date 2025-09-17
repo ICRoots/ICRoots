@@ -4,6 +4,6 @@ type InitArgs = record {
   loans : opt principal;
 };
 service : (opt InitArgs) -> {
-  get_level : (principal) -> (nat64) query;
-  set_level : (principal, nat64) -> ();
+  get_level : (principal) -> (nat) query;
+  set_level : (principal, nat) -> ();
 }
