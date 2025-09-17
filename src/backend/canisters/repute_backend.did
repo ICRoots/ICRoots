@@ -5,5 +5,5 @@ type InitArgs = record {
 };
 service : (opt InitArgs) -> {
   get_level : (principal) -> (nat64) query;
-  set_level : (principal, nat64) -> ();  // This should be nat64, not nat
+  set_level : (principal, nat64) -> ();
 }

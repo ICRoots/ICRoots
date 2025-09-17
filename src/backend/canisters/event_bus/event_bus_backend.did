@@ -1,10 +1,6 @@
-type Event = record {
-  timestamp : nat64;
-  message : text;
-};
+type Event = text;
 
 service : {
-  emit : (text) -> ();
-  list_recent : (nat64) -> (vec text) query;
-  get_events : () -> (vec Event) query;
+  emit: (Event) -> ();
+  list_recent: (nat64) -> (vec Event) query;
 }

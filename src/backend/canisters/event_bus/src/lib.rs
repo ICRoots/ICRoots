@@ -30,14 +30,4 @@ fn list_recent(limit: u64) -> Vec<String> {
     })
 }
 
-// Add this at the end of the file to export Candid interface
-#[ic_cdk::query(name = "__get_candid_interface_tmp_hack")]
-fn export_candid() -> String {
-    include_str!("../event_bus_backend.did").to_string()
-}
-
-#[cfg(feature = "export-api")]
-#[ic_cdk::query(name = "get_candid_pointer")]
-fn get_candid_pointer() -> *const std::os::raw::c_char {
-    export_candid().as_ptr() as *const std::os::raw::c_char
-}
+ic_cdk::export_candid!();
