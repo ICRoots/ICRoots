@@ -1,0 +1,14 @@
+{
+  "local": {
+    "providers": ["http://127.0.0.1:4943"],
+    "type": "ephemeral"
+  },
+  "playground": {
+    "providers": ["https://playground.dfinity.network"],
+    "type": "playground"
+  },
+  "ic": {
+    "providers": ["https://ic0.app"],
+    "type": "persistent"
+  }
+}
