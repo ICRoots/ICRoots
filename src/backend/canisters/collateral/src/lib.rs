@@ -1,11 +1,12 @@
 use candid::{CandidType, Deserialize, Principal};
 use ic_cdk::{api::caller, call, trap};
 use ic_cdk::storage::{stable_restore, stable_save};
-use ic_cdk_macros::{init, post_upgrade, pre_upgrade, query, update};
-use serde::{Deserialize as SerdeDeserialize, Serialize};
+use ic_cdk_macros::{init, post_upgrade, pre_upgrade, update};
+use serde::Serialize;
 use serde_json::json;
 use std::cell::RefCell;
 use std::collections::{HashMap, HashSet};
+use ic_cdk::query;
 
 #[derive(CandidType, Deserialize, Clone, Debug)]
 struct State {
@@ -112,6 +113,17 @@ fn ensure_can_deposit() -> Result<(), String> {
         } else {
             Err("unauthorized: caller is not admin or allowed depositor".into())
         }
+    })
+}
+
+// Function to export as a query method
+#[query]
+fn get_collateral(user: Principal) -> u128 {
+    COLLATERAL_STORE.with(|cs| {
+        cs.borrow()
+            .get(&user)
+            .map(|info| info.amount)
+            .unwrap_or(0)
     })
 }
 

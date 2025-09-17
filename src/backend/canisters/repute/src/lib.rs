@@ -5,6 +5,13 @@ use ic_cdk_macros::{init, post_upgrade, pre_upgrade, query, update};
 use serde_json::json;
 use std::cell::RefCell;
 use std::collections::{HashMap, HashSet};
+use ic_cdk::api::management_canister::provisional::CanisterId;
+use ic_cdk::{query, update, init, pre_upgrade, post_upgrade};
+use ic_stable_structures::memory_manager::{MemoryId, MemoryManager, VirtualMemory};
+use ic_stable_structures::{DefaultMemoryImpl, StableBTreeMap};
+
+type Memory = VirtualMemory<DefaultMemoryImpl>;
+type IdStore = StableBTreeMap<Principal, u64, Memory>;
 
 #[derive(CandidType, Deserialize, Clone, Debug)]
 struct State {
@@ -30,6 +37,15 @@ impl Default for State {
 
 thread_local! {
     static STATE: RefCell<State> = RefCell::new(State::default());
+    static MEMORY_MANAGER: RefCell<MemoryManager<DefaultMemoryImpl>> = RefCell::new(
+        MemoryManager::init(DefaultMemoryImpl::default())
+    );
+
+    static LEVELS: RefCell<IdStore> = RefCell::new(
+        StableBTreeMap::init(
+            MEMORY_MANAGER.with(|m| m.borrow().get(MemoryId::new(1)))
+        )
+    );
 }
 
 #[derive(CandidType, Deserialize, Clone, Debug, Default)]
