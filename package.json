@@ -7,7 +7,21 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "bash ./scripts/deploy-canisters.sh",
+    "generate-candid": "bash ./scripts/generate-candid.sh",
+    "fix-rust-warnings": "cargo fix --lib --allow-dirty --allow-staged",
+    "check-health": "npm run deploy:local && node -e \"import('./src/frontend/src/services/icRootsService.ts').then(s => s.icRootsService.healthCheck().then(console.log))\"",
+    "deploy:local": "dfx deploy --network local",
+    "deploy:playground": "dfx deploy --network playground --with-cycles 1000000000000",
+    "deploy:ic": "dfx deploy --network ic --with-cycles 1000000000000",
+    "test:local": "npm run deploy:local && npm run test:frontend && npm run test:backend",
+    "test:playground": "npm run deploy:playground && npm run test:integration",
+    "pre-mainnet-check": "npm run test:local && npm run test:playground",
+    "test:canisters": "bash ./scripts/test-canisters.sh",
+    "test:frontend:services": "vitest run src/frontend/tests/services/",
+    "test:integration": "npm run test:canisters && npm run test:frontend:services",
+    "test:health": "node -e \"import('./src/frontend/src/services/icRootsService.js').then(s => s.icRootsService.healthCheck().then(console.log))\""
   },
   "dependencies": {
     "@dfinity/agent": "^3.0.0",
@@ -23,9 +37,11 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
+    "@types/node": "^24.5.1",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "@vitest/ui": "^3.2.4",
     "autoprefixer": "^10.4.18",
     "eslint": "^9.9.1",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
@@ -35,6 +51,7 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.3.0",
-    "vite": "^5.4.2"
+    "vite": "^5.4.2",
+    "vitest": "^3.2.4"
   }
 }
