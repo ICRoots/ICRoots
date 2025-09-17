@@ -3,4 +3,7 @@ type InitArgs = record {
   admin : opt principal;
   loans : opt principal;
 };
-service : (opt InitArgs) -> { deposit_mock : (principal, nat) -> () }
+service : (opt InitArgs) -> { 
+  deposit_mock : (principal, nat) -> ();
+  get_collateral : (principal) -> (nat) query;
+}

@@ -115,6 +115,13 @@ fn ensure_can_deposit() -> Result<(), String> {
     })
 }
 
+#[query]
+fn get_collateral(user: Principal) -> u128 {
+    STATE.with(|s| {
+        *s.borrow().balances.get(&user).unwrap_or(&0)
+    })
+}
+
 // -------------- (optional) basic tests --------------
 #[cfg(test)]
 mod tests {
