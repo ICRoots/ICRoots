@@ -6,7 +6,10 @@
       "package": "loans_backend",
       "candid": "src/backend/canisters/loans/loans_backend.did",
       "declarations": {
-        "bindings": ["js", "ts", "did"],
+        "bindings": [
+          "ts",
+          "did"
+        ],
         "output": "src/declarations/loans_backend"
       },
       "metadata": [
@@ -20,7 +23,10 @@
       "package": "collateral_backend",
       "candid": "src/backend/canisters/collateral/collateral_backend.did",
       "declarations": {
-        "bindings": ["js", "ts", "did"],
+        "bindings": [
+          "ts",
+          "did"
+        ],
         "output": "src/declarations/collateral_backend"
       },
       "metadata": [
@@ -34,7 +40,10 @@
       "package": "repute_backend",
       "candid": "src/backend/canisters/repute/repute_backend.did",
       "declarations": {
-        "bindings": ["js", "ts", "did"],
+        "bindings": [
+          "ts",
+          "did"
+        ],
         "output": "src/declarations/repute_backend"
       },
       "metadata": [
@@ -48,7 +57,10 @@
       "package": "trust_ai_backend",
       "candid": "src/backend/canisters/trust_ai/trust_ai_backend.did",
       "declarations": {
-        "bindings": ["js", "ts", "did"],
+        "bindings": [
+          "ts",
+          "did"
+        ],
         "output": "src/declarations/trust_ai_backend"
       },
       "metadata": [
@@ -62,7 +74,10 @@
       "package": "event_bus_backend",
       "candid": "src/backend/canisters/event_bus/event_bus_backend.did",
       "declarations": {
-        "bindings": ["js", "ts", "did"],
+        "bindings": [
+          "ts",
+          "did"
+        ],
         "output": "src/declarations/event_bus_backend"
       },
       "metadata": [
@@ -72,16 +87,15 @@
       ]
     }
   },
-  "networks": {
-    "icpninja": {
-      "providers": ["https://icp-api.io"],
-      "type": "persistent"
-    }
-  },
+  "version": 1,
   "defaults": {
     "build": {
       "declarations": {
-        "bindings": ["js", "ts", "did"]
+        "bindings": [
+          "js",
+          "ts",
+          "did"
+        ]
       }
     }
   }
