@@ -73,7 +73,10 @@
     }
   },
   "networks": {
-    "config": "config/networks.json"
+    "icpninja": {
+      "providers": ["https://icp-api.io"],
+      "type": "persistent"
+    }
   },
   "defaults": {
     "build": {
