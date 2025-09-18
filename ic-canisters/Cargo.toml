@@ -1,0 +1,9 @@
+[workspace]
+members = [
+  "src/backend/canisters/event_bus",
+  "src/backend/canisters/repute",
+  "src/backend/canisters/collateral",
+  "src/backend/canisters/trust_ai",
+  "src/backend/canisters/loans",
+]
+resolver = "2"

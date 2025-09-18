@@ -1,0 +1,23 @@
+{
+  "canisters": {
+    "icroots_loans_backend": {
+      "candid": "src/icroots_loans_backend/icroots_loans_backend.did",
+      "package": "icroots_loans_backend",
+      "type": "rust"
+    },
+    "icroots_loans_frontend": {
+      "dependencies": ["icroots_loans_backend"],
+      "source": ["src/icroots_loans_frontend/dist"],
+      "type": "assets",
+      "workspace": "icroots_loans_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

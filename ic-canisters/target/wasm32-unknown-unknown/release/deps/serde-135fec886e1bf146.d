@@ -1,0 +1,14 @@
+/home/icekid/Projects/ICRoots-2/target/wasm32-unknown-unknown/release/deps/serde-135fec886e1bf146.d: /home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/lib.rs /home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/integer128.rs /home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/private/mod.rs /home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/private/de.rs /home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/private/ser.rs /home/icekid/Projects/ICRoots-2/target/wasm32-unknown-unknown/release/build/serde-efc9e8314d500e05/out/private.rs
+
+/home/icekid/Projects/ICRoots-2/target/wasm32-unknown-unknown/release/deps/libserde-135fec886e1bf146.rlib: /home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/lib.rs /home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/integer128.rs /home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/private/mod.rs /home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/private/de.rs /home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/private/ser.rs /home/icekid/Projects/ICRoots-2/target/wasm32-unknown-unknown/release/build/serde-efc9e8314d500e05/out/private.rs
+
+/home/icekid/Projects/ICRoots-2/target/wasm32-unknown-unknown/release/deps/libserde-135fec886e1bf146.rmeta: /home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/lib.rs /home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/integer128.rs /home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/private/mod.rs /home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/private/de.rs /home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/private/ser.rs /home/icekid/Projects/ICRoots-2/target/wasm32-unknown-unknown/release/build/serde-efc9e8314d500e05/out/private.rs
+
+/home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/lib.rs:
+/home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/integer128.rs:
+/home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/private/mod.rs:
+/home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/private/de.rs:
+/home/icekid/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.225/src/private/ser.rs:
+/home/icekid/Projects/ICRoots-2/target/wasm32-unknown-unknown/release/build/serde-efc9e8314d500e05/out/private.rs:
+
+# env-dep:OUT_DIR=/home/icekid/Projects/ICRoots-2/target/wasm32-unknown-unknown/release/build/serde-efc9e8314d500e05/out

@@ -1,0 +1,9 @@
+type InitArgs = record {
+  event_bus : opt principal;
+  admin : opt principal;
+  loans : opt principal;
+};
+service : (opt InitArgs) -> {
+  get_level : (principal) -> (nat) query;
+  set_level : (principal, nat) -> ();
+}
